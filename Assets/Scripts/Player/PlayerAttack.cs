@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+
     [Header("Reference")]
     [SerializeField] private GameObject[] projectiles;
     [SerializeField] private Transform projectilePoint;
@@ -19,10 +20,13 @@ public class PlayerAttack : MonoBehaviour
 
     #region Component
     private Animator anim;
+    private PlayerController playerController;
     #endregion
 
     private void Awake()
     {
+        // get headquarters player controller 
+        playerController = GetComponent<PlayerController>();
         // get component 
         anim = GetComponent<Animator>();
     }
@@ -59,9 +63,16 @@ public class PlayerAttack : MonoBehaviour
         {
             // throw projectile
             float force = CalculateThrowForce(timeThrowForceCounter);
-            Debug.Log(force);
-            weapon.throwProjectile(new Vector2(1, 1), force);
+            weapon.throwProjectile(getThrowDirection(), force);
         }
+    }
+
+    public Vector2 getThrowDirection()
+    {
+        Vector2 direction = playerController.ShootDirectionController.direction;
+        direction.x *= Mathf.Sign(transform.localScale.x);
+        Debug.Log(direction);
+        return direction;
     }
 
     // calculate rate when hold space to throw

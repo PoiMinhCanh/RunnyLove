@@ -8,6 +8,7 @@ public class PowerBarController : MonoBehaviour
     [SerializeField]
     private Image fillBar;
 
+
     private void Awake()
     {
         Instance = this;
