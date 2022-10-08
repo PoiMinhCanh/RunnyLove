@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - PlayerWeapon
   layers:
   - Default
   - TransparentFX
@@ -11,9 +13,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - Ground
+  - PlayerWeapon
   - 
   - 
   - 
@@ -40,4 +42,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2324203245
+    locked: 0
+  - name: Foreground
+    uniqueID: 2363856647
+    locked: 0
+  - name: Player
+    uniqueID: 3247171581
+    locked: 0
+  - name: Ground
+    uniqueID: 856035833
     locked: 0
