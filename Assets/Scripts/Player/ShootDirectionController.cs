@@ -8,7 +8,15 @@ public class ShootDirectionController : MonoBehaviour
     private LineRenderer lineRenderer;
     
     private float _radius = 3.6f;
-    private int angle = 8; // from 8 to 90C
+
+    private float _maxAngle = 90;
+    private float _minAngle = 8;
+    private float _incrementUnitAngle = 0.5f;
+
+    private float angle = 8; // from _minAngle to maxAngle
+    
+    private float incrementUnitTime = 0.05f;
+    private float incrementUnitTimeCounter = 0;
 
     public Vector2 direction;
 
@@ -28,15 +36,40 @@ public class ShootDirectionController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            angle = Mathf.Min(++angle, 90);
-            setEndPoint();
+            incrementUnitTimeCounter -= Time.deltaTime;
+            if (incrementUnitTimeCounter <= 0)
+            {
+                angle = Mathf.Min(angle + _incrementUnitAngle, _maxAngle);
+                // reset increment unit time counter
+                incrementUnitTimeCounter = incrementUnitTime;
+                Debug.Log(angle);
+                setEndPoint();
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            incrementUnitTimeCounter = 0;
         }
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            angle = Mathf.Max(--angle, 8);
-            setEndPoint();
+            incrementUnitTimeCounter -= Time.deltaTime;
+            if (incrementUnitTimeCounter <= 0)
+            {
+                angle = Mathf.Max(angle - _incrementUnitAngle, _minAngle);
+                // reset increment unit time counter
+                incrementUnitTimeCounter = incrementUnitTime;
+                Debug.Log(angle);
+                setEndPoint();
+            }
         }
+
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            incrementUnitTimeCounter = 0;
+        }
+
     }
 
     public void setEndPoint()

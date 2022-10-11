@@ -57,7 +57,7 @@ public class PlayerAttack : MonoBehaviour
         // pool fireballs
         int index = FindProjectile();
         projectiles[index].transform.position = projectilePoint.position;
-        projectiles[index].SetActive(true);
+        projectiles[index].GetComponent<ProjectileController>().ActivateProjectile();
         IThrowWeapon weapon = projectiles[index].GetComponent<IThrowWeapon>();
         if (weapon != null)
         {
