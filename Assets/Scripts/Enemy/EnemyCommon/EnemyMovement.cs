@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    [SerializeField] private float speed;
+    
     private Animator anim;
 
     private void Awake()
@@ -12,6 +14,6 @@ public class EnemyMovement : MonoBehaviour
     public void Run()
     {
         anim.SetTrigger("run");
-        transform.Translate(-1, 0, 0);
+        transform.Translate(-speed, 0, 0);
     }
 }

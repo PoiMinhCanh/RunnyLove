@@ -42,7 +42,7 @@ public class ShootDirectionController : MonoBehaviour
                 angle = Mathf.Min(angle + _incrementUnitAngle, _maxAngle);
                 // reset increment unit time counter
                 incrementUnitTimeCounter = incrementUnitTime;
-                Debug.Log(angle);
+                //Debug.Log(angle);
                 setEndPoint();
             }
         }
@@ -60,7 +60,7 @@ public class ShootDirectionController : MonoBehaviour
                 angle = Mathf.Max(angle - _incrementUnitAngle, _minAngle);
                 // reset increment unit time counter
                 incrementUnitTimeCounter = incrementUnitTime;
-                Debug.Log(angle);
+                //Debug.Log(angle);
                 setEndPoint();
             }
         }

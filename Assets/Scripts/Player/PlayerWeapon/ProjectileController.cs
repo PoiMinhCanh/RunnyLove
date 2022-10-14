@@ -31,18 +31,11 @@ public class ProjectileController : PlayerDamage, IThrowWeapon
     private void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision); // Excute logic from parent script first
-        circleCollider2D.enabled = false;
-        if (collision != null)
+
+        // if collider is gate
+        if (collision.tag == "Gate" || collision.tag == "Ground")
         {
             gameObject.SetActive(false);
-        }
-        if (anim != null)
-        {
-            anim.SetTrigger("explode"); // when the object is a fireball explode it
-        }
-        else
-        {
-            gameObject.SetActive(false); // when this hits any object deactive arrow
         }
     }
  
@@ -50,6 +43,8 @@ public class ProjectileController : PlayerDamage, IThrowWeapon
     {
         rb.AddForce(direction * force, ForceMode2D.Impulse);
     }
+
+    // use this when end of die animation
     private void Deactivate()
     {
         gameObject.SetActive(false);

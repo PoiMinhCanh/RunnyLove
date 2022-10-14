@@ -1,4 +1,5 @@
 using Assets.Scripts.Interface;
+using System.Runtime.ConstrainedExecution;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float _minForce;
     [SerializeField] private float _maxForce;
     [SerializeField] private float _timeThrowForce;
+    [SerializeField] private int _shotsPerTurn;
+
+    private int shotsPerTurnCounter;
 
     #region variables
     private float timeThrowForceCounter;
@@ -29,10 +33,18 @@ public class PlayerAttack : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         // get component 
         anim = GetComponent<Animator>();
+
+        shotsPerTurnCounter = _shotsPerTurn;
     }
 
     private void Update()
     {
+        if (shotsPerTurnCounter <= 0)
+        {
+            TurnPlayController.Instance.changeTurn(false);
+            shotsPerTurnCounter = _shotsPerTurn;
+        }
+        
         if (Input.GetKey(KeyCode.Space))
         {
             timeThrowForceCounter += Time.deltaTime;
@@ -44,6 +56,7 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             Attack();
+            shotsPerTurnCounter--;
             // reset timeThrowForceCounter
             timeThrowForceCounter = 0;
         }
