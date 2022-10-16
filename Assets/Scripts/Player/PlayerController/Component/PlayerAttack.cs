@@ -41,7 +41,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (shotsPerTurnCounter <= 0)
         {
-            TurnPlayController.Instance.changeTurn(false);
+            GameStateController.Instance.enemyTurn();
             shotsPerTurnCounter = _shotsPerTurn;
         }
         

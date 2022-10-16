@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [Header("Point Spawner")]
+    [SerializeField] private Transform pointSpawner;
+
     [Header("Enemy Holder Objects")]
     [SerializeField] private GameObject[] listSpawnObject;
     [SerializeField] private Transform[] listEnemyBagHolder;
 
     [SerializeField] private List<GameObject>[] listSpawnContainer;
 
+    // Component
+    private Animator anim;
+
     private int _quantitySpawnObject;
 
     private void Awake()
     {
+        // get component
+        anim = GetComponent<Animator>();
+
         _quantitySpawnObject = listSpawnObject.Length;
         listSpawnContainer = new List<GameObject>[_quantitySpawnObject];
         for (int i = 0; i < _quantitySpawnObject; i++)
@@ -67,7 +76,7 @@ public class Spawner : MonoBehaviour
         return quantity;
     }
 
-    public void Spawn(int quantity)
+    public List<GameObject> Spawn(int quantity)
     {
         // random list type of enemy
         int[] randomSpawnObj = new int[_quantitySpawnObject];
@@ -93,21 +102,33 @@ public class Spawner : MonoBehaviour
                 listSpawnContainer[i].AddRange(newObjs);
             }
 
-            listSpawn.ForEach(spawnObj =>
-            {
-                spawnObj.GetComponent<Health>().Respawn();
-                randomPosition(spawnObj);
-            });
         }
+        return listSpawn;
     }
 
-    public void randomPosition(GameObject spawnObj)
+    public void resetSpawnObj(GameObject spawnObj)
     {
-        // new spawn position
-        var newSpawnPosition = transform.position;
-        newSpawnPosition += new Vector3(Random.Range(-8f, 0f), Random.Range(2f, 3f), 0f);
-        // set position value
-        spawnObj.transform.position = newSpawnPosition;
+        spawnObj.GetComponent<Health>().Respawn();
+        spawnObj.transform.position = pointSpawner.position;
     }
 
+    // return true if first run event done, else return false;
+    public bool firstRun(GameObject spawnObj, ref int quantity)
+    {
+        spawnObj.GetComponent<EnemyMovement>().Run();
+        quantity--;
+        return quantity <= 0;
+    }
+
+    // set open gate animation
+    public void openGateAnimation()
+    {
+        anim.SetBool("open", true);
+    }
+
+    // set close gate animation
+    public void closeGateAnimation()
+    {
+        anim.SetBool("open", false);
+    }
 }

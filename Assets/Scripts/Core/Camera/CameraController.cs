@@ -5,6 +5,7 @@ public class CameraController : MonoBehaviour
     [Header("Reference Component")]
     [SerializeField] private Camera _camera;
     [SerializeField] private BoxCollider2D confiner;
+    [SerializeField] private Transform playerTransform;
 
     // drag camera
     private Vector3 dragPointMouse;
@@ -18,10 +19,12 @@ public class CameraController : MonoBehaviour
     // confider boundary camera
     private float mapMinX, mapMaxX, mapMinY, mapMaxY;
 
+    // speed camera move
+    [Header("Set property")]
+    [SerializeField] private float speed;
+
     private void Awake()
     {
-        // get position of main camera (The first enabled Camera component that is tagged "MainCamera")
-        _originPositionCamera = _camera.transform.position;
         // get confiner boundary camera
         // horizontal
         mapMinX = confiner.transform.position.x + confiner.offset.x - confiner.bounds.size.x / 2f;
@@ -35,6 +38,14 @@ public class CameraController : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        // get position of main camera (The first enabled Camera component that is tagged "MainCamera")
+        _originPositionCamera = playerTransform.position;
+        _originPositionCamera.z = -10;
+        _originPositionCamera = ClampCamera(_originPositionCamera);
+    }
+
     private void LateUpdate()
     {
         // pan camera 
@@ -42,15 +53,22 @@ public class CameraController : MonoBehaviour
 
         // scroll map by mouse wheel
         zoomCamera();
-     
+
+        // update boundary camera
+        _camera.transform.position = ClampCamera(_camera.transform.position);
+
         // click right click
         // return camera
         if (Input.GetMouseButton(1))
         {
-            _camera.transform.position = _originPositionCamera;
-            _camera.orthographicSize = _originZoomSize;
+            resetCamera();
         }
-    
+    }
+
+    public void resetCamera()
+    {
+        _camera.transform.position = _originPositionCamera;
+        _camera.orthographicSize = _originZoomSize;
     }
 
     private void PanCamera()
@@ -82,9 +100,12 @@ public class CameraController : MonoBehaviour
 
     private void zoomCamera()
     {
-        float newSize = _camera.orthographicSize - Input.GetAxis("Mouse ScrollWheel") * _zoomSizeStep;
-        _camera.orthographicSize = Mathf.Clamp(newSize, _minZoomSize, _maxZoomSize);
-        _camera.transform.position = ClampCamera(_camera.transform.position);
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        {
+            float newSize = _camera.orthographicSize - Input.GetAxis("Mouse ScrollWheel") * _zoomSizeStep;
+            _camera.orthographicSize = Mathf.Clamp(newSize, _minZoomSize, _maxZoomSize);
+            _camera.transform.position = ClampCamera(_camera.transform.position);
+        }
     }
 
     private Vector3 ClampCamera(Vector3 targetPosition)
@@ -104,4 +125,25 @@ public class CameraController : MonoBehaviour
                            Mathf.Clamp(targetPosition.y, minY, maxY),
                            targetPosition.z);
     }
+
+    // move to new position
+    // return true if done, else return false
+    public bool moveToPosition(Vector3 position)
+    {
+        // set boundary camera
+        if (Vector3.Distance(transform.position, ClampCamera(position)) < 0.1f)
+        {
+            return true;
+        }
+
+        // check done or not
+        if (Vector3.Distance(transform.position, position) > 0.1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, position, speed * Time.deltaTime);
+            return false;
+        }
+        // return holder
+        return true;
+    }
+
 }

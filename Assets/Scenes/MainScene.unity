@@ -206,6 +206,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 884955094}
   - {fileID: 1633669942}
   - {fileID: 1067509507}
   m_Father: {fileID: 0}
@@ -243,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6981c41a9b9bda543a3c2038e58d48e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointSpawner: {fileID: 884955094}
   listSpawnObject:
   - {fileID: 7973952741790399197, guid: 131811f9182489542b553acdf12473ff, type: 3}
   - {fileID: 360257517253146492, guid: e3171a3d71850624e8fa52027e2fbcf8, type: 3}
@@ -632,6 +634,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
   confiner: {fileID: 718608157}
+  playerTransform: {fileID: 617430585}
+  speed: 7
 --- !u!1 &589122190
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,7 +678,7 @@ GameObject:
   - component: {fileID: 607994103}
   - component: {fileID: 607994104}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GameManagement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -792,7 +796,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617430583}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.78, y: -1.67, z: 0}
+  m_LocalPosition: {x: -0.12, y: -0.93, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1020,9 +1024,9 @@ MonoBehaviour:
   gameObjs:
   - {fileID: 1871219097}
   ShootDirectionController: {fileID: 617430591}
-  PlayerAttack: {fileID: 0}
-  PlayerMovement: {fileID: 0}
-  lineRenderer: {fileID: 0}
+  PlayerAttack: {fileID: 617430589}
+  PlayerMovement: {fileID: 617430594}
+  lineRenderer: {fileID: 617430592}
 --- !u!114 &617430594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1708,6 +1712,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 37.99914, y: 15.039842}
   m_EdgeRadius: 0
+--- !u!1 &884955093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 884955094}
+  m_Layer: 10
+  m_Name: PointSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &884955094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884955093}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.47, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 26392104}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1006763918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1806,7 +1841,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 26392104}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1071826859
 GameObject:
@@ -2399,7 +2434,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 26392104}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1646050455
 GameObject:
@@ -2909,7 +2944,7 @@ GameObject:
   - component: {fileID: 2131114238}
   - component: {fileID: 2131114239}
   m_Layer: 0
-  m_Name: TurnPlayManager
+  m_Name: GameState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2943,7 +2978,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerController: {fileID: 617430593}
+  playerTransform: {fileID: 617430585}
   Spawner: {fileID: 26392106}
+  CameraController: {fileID: 519420033}
+  gateTransform: {fileID: 26392104}
+  gameState: 0
 --- !u!1 &2138007801
 GameObject:
   m_ObjectHideFlags: 0

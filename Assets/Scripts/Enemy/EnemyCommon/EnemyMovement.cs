@@ -16,4 +16,5 @@ public class EnemyMovement : MonoBehaviour
         anim.SetTrigger("run");
         transform.Translate(-speed, 0, 0);
     }
+
 }

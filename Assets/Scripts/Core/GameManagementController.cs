@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
-public class GameManagerController : MonoBehaviour
+public class GameManagementController : MonoBehaviour
 {
     private void Awake()
     {
@@ -14,4 +15,5 @@ public class GameManagerController : MonoBehaviour
         Physics2D.IgnoreLayerCollision(StaticProperties.CameraConfiner, StaticProperties.Gate, true);
 
     }
+
 }
