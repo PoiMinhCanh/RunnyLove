@@ -84,7 +84,7 @@ public class PlayerAttack : MonoBehaviour
     {
         Vector2 direction = playerController.ShootDirectionController.direction;
         direction.x *= Mathf.Sign(transform.localScale.x);
-        Debug.Log(direction);
+        //Debug.Log(direction);
         return direction;
     }
 

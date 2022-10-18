@@ -17,7 +17,7 @@ public class Health : MonoBehaviour, IHealth
     [SerializeField] private float iFramesDuration;
     [SerializeField] private int numberOfFlashes;
     private SpriteRenderer spriteRend;
-    private bool invulnerable;
+    //private bool invulnerable;
 
     //[Header("Component")]
     //[SerializeField] private Behaviour[] components;
@@ -41,7 +41,7 @@ public class Health : MonoBehaviour, IHealth
 
     public void TakeDamage(float damage)
     {
-        if (invulnerable) return;
+        //if (invulnerable) return;
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, _startingHealth);
         Debug.Log(currentHealth);
         UpdateHealthBarImage();
@@ -50,7 +50,7 @@ public class Health : MonoBehaviour, IHealth
             // player hurt
             animator.SetTrigger("hurt");
             // iframes
-            StartCoroutine(Invunerability());
+            //StartCoroutine(Invunerability());
         }
         else
         {
@@ -76,20 +76,20 @@ public class Health : MonoBehaviour, IHealth
         HealthBar.UpdateHealthBarImage(currentHealth / _startingHealth);
     }
 
-    private IEnumerator Invunerability()
-    {
-        invulnerable = true;
-        //Physics2D.IgnoreLayerCollision(8, 9, true);
-        for (int i = 0; i < numberOfFlashes; i++)
-        {
-            spriteRend.color = new Color(1, 1, 1, 0.9f);
-            yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
-            spriteRend.color = Color.white;
-            yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
-        }
-        //Physics2D.IgnoreLayerCollision(8, 9, false);
-        invulnerable = false;
-    }
+    //private IEnumerator Invunerability()
+    //{
+    //    //invulnerable = true;
+    //    //Physics2D.IgnoreLayerCollision(8, 9, true);
+    //    for (int i = 0; i < numberOfFlashes; i++)
+    //    {
+    //        spriteRend.color = new Color(1, 1, 1, 0.9f);
+    //        yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
+    //        spriteRend.color = Color.white;
+    //        yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
+    //    }
+    //    //Physics2D.IgnoreLayerCollision(8, 9, false);
+    //    //invulnerable = false;
+    //}
 
     private void Deactivate()
     {
@@ -101,5 +101,10 @@ public class Health : MonoBehaviour, IHealth
         BloodRecovery(_startingHealth);
         dead = false;
         gameObject.SetActive(true);
+    }
+
+    public bool isDead()
+    {
+        return dead;
     }
 }

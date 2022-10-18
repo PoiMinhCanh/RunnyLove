@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStateController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameStateController : MonoBehaviour
 
     [Header("Enemy Controller")]
     [SerializeField] private Spawner Spawner;
+    [SerializeField] private GameObject BossEnemy;
 
     [Header("Camera Controller")]
     [SerializeField] private CameraController CameraController;
@@ -40,6 +42,24 @@ public class GameStateController : MonoBehaviour
         playerTurn();
     }
 
+    private void Update()
+    {
+        if (BossEnemy.GetComponent<Health>().isDead())
+        {
+            gameState = GameState.WON;
+            Debug.Log(gameState);
+            endGame();
+        }
+    }
+
+    public void endGame()
+    {
+        // that this will only work from a built application.
+        //Application.Quit();
+        //UnityEditor.EditorApplication.isPlaying = false;
+        SceneManager.LoadScene("EndScene");
+    }
+
     private void playerTurn()
     {
         gameState = GameState.PLAYERTURN;
@@ -57,6 +77,8 @@ public class GameStateController : MonoBehaviour
 
     private IEnumerator spawnEnemyAndAttack()
     {
+        yield return new WaitForSeconds(2f);
+
         // set camera focus on gate
         Vector3 gatePosition = gateTransform.position;
         gatePosition.z = -10;
