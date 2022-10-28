@@ -54,23 +54,17 @@ public class GameStateController : MonoBehaviour
 
     public void endGame()
     {
-        // that this will only work from a built application.
-        //Application.Quit();
-        //UnityEditor.EditorApplication.isPlaying = false;
+        gameState = GameState.LOST;
         SceneManager.LoadScene("EndScene");
     }
 
     private void playerTurn()
     {
-        gameState = GameState.PLAYERTURN;
-
         PlayerController.toggleComponents(true);
     }
 
     public void enemyTurn()
     {
-        gameState = GameState.ENEMYTURN;
-
         PlayerController.toggleComponents(false);
         StartCoroutine(spawnEnemyAndAttack());
     }
@@ -98,29 +92,39 @@ public class GameStateController : MonoBehaviour
         {
             // "Respawn" game obj
             Spawner.resetSpawnObj(spawnObj);
-            // random nums of run
-            int numsOfRun = Random.Range(1, 4);
-            // time to excute one function
-            float timer = 1f;
+            if (spawnObj.GetComponent<EnemyController>().type == EnemyType.EAGLE
+             || spawnObj.GetComponent<EnemyController>().type == EnemyType.BAT)
+            {
+                // make fly "slow" a little bit, there is 0.2f seconds
+                float timer = 0.01f;
+                yield return new WaitUntil(() => {
+                    timer -= Time.deltaTime;
+                    if (timer <= 0)
+                    {
+                        timer = 0.01f;
+                        return spawnObj.GetComponent<EnemyMovement>().flyHigh();
+                    }
+                    return false;
+                });
+            }
+            // enemy will excute first move
+            spawnObj.GetComponent<EnemyMovement>().isFirstMove = true;
 
-            yield return new WaitUntil(() => {
-                timer -= Time.deltaTime;
-                if (timer <= 0)
-                {
-                    timer = 1f;
-                    return Spawner.firstRun(spawnObj, ref numsOfRun);
-                }
-                else return false;
-            });
-            yield return new WaitForSeconds(0.5f);
+            // time to excute one function
+            // random nums of run
+            float randomSecondsForFirstMove = Random.Range(0.3f, 2f);
+            yield return new WaitForSeconds(randomSecondsForFirstMove);
+            spawnObj.GetComponent<EnemyMovement>().isFirstMove = false;
         }
 
         // enemies run
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
 
-        Spawner.Run();
+        this.gameState = GameState.ENEMYTURN;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
+
+        this.gameState = GameState.PLAYERTURN;
 
         // close gate animation
         Spawner.closeGateAnimation();
@@ -135,7 +139,6 @@ public class GameStateController : MonoBehaviour
 
         // change to player turn
         playerTurn();
-
     }
 
 }

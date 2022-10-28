@@ -1,5 +1,8 @@
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -31,20 +34,6 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public void Run()
-    {
-        for (int i = 0; i < _quantitySpawnObject; i++)
-        {
-            listSpawnContainer[i].ForEach(spawnObj =>
-            {
-                if (spawnObj.activeInHierarchy)
-                {
-                    spawnObj.GetComponent<EnemyMovement>().Run();
-                }
-            });
-        }
-    }
-
     private List<GameObject> cloneGameObject(int index, int quantity)
     {
         List<GameObject> listSpawn = new List<GameObject>();
@@ -53,6 +42,7 @@ public class Spawner : MonoBehaviour
         {
             // clone gameObject
             GameObject clone = Instantiate(listSpawnObject[index], transform);
+            clone.GetComponent<EnemyController>().setType((EnemyType)index);
             clone.SetActive(false);
             // set clone gameObject into holder
             clone.transform.SetParent(listEnemyBagHolder[index]);
@@ -110,14 +100,7 @@ public class Spawner : MonoBehaviour
     {
         spawnObj.GetComponent<Health>().Respawn();
         spawnObj.transform.position = pointSpawner.position;
-    }
-
-    // return true if first run event done, else return false;
-    public bool firstRun(GameObject spawnObj, ref int quantity)
-    {
-        spawnObj.GetComponent<EnemyMovement>().Run();
-        quantity--;
-        return quantity <= 0;
+        spawnObj.GetComponent<EnemyMovement>().isFirstMove = false;
     }
 
     // set open gate animation

@@ -11,11 +11,11 @@ public class ShootDirectionController : MonoBehaviour
 
     private float _maxAngle = 90;
     private float _minAngle = 8;
-    private float _incrementUnitAngle = 0.5f;
+    private float _incrementUnitAngle = 0.8f;
 
     private float angle = 8; // from _minAngle to maxAngle
     
-    private float incrementUnitTime = 0.05f;
+    private float incrementUnitTime = 0.03f;
     private float incrementUnitTimeCounter = 0;
 
     public Vector2 direction;

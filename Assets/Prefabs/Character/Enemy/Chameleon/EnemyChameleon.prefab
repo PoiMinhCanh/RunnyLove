@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 360257517253146495}
   - component: {fileID: 4788974910449966605}
   - component: {fileID: 5375663250729622800}
+  - component: {fileID: 3125762423000416049}
   - component: {fileID: 9144159037499075}
   - component: {fileID: -3134372866038150830}
   - component: {fileID: 1278394947539407885}
+  - component: {fileID: 2360915052486311381}
   m_Layer: 9
   m_Name: EnemyChameleon
   m_TagString: Enemy
@@ -148,6 +150,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3125762423000416049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360257517253146492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511ad86b368a2da41bfd2a8f6eb1d5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
 --- !u!114 &9144159037499075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4f4fd6962958647937052382c570c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 1.7
+  isFirstMove: 0
 --- !u!114 &1278394947539407885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +205,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d14ae08e40adf47b05ad5602dd45ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2360915052486311381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360257517253146492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511ad86b368a2da41bfd2a8f6eb1d5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
 --- !u!1001 &7720149716449289438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -242,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6396898568584505712, guid: c9188b01a62bec14c8f3628d6169528c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6396898568584505712, guid: c9188b01a62bec14c8f3628d6169528c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -278,7 +307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6396898568584505712, guid: c9188b01a62bec14c8f3628d6169528c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.2
+      value: 0.23
       objectReference: {fileID: 0}
     - target: {fileID: 6396898568584505712, guid: c9188b01a62bec14c8f3628d6169528c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

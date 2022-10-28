@@ -43,7 +43,7 @@ public class Health : MonoBehaviour, IHealth
     {
         //if (invulnerable) return;
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, _startingHealth);
-        Debug.Log(currentHealth);
+        //Debug.Log(currentHealth);
         UpdateHealthBarImage();
         if (currentHealth > 0)
         {
