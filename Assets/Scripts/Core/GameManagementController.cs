@@ -14,6 +14,9 @@ public class GameManagementController : MonoBehaviour
         Physics2D.IgnoreLayerCollision(StaticProperties.CameraConfiner, StaticProperties.Enemy, true);
         Physics2D.IgnoreLayerCollision(StaticProperties.CameraConfiner, StaticProperties.Gate, true);
 
+        // Player Ignore Enemy in the Game
+        Physics2D.IgnoreLayerCollision(StaticProperties.Player, StaticProperties.Enemy, true);
+        
         // Enemy Ignore Enemy in the Game
         Physics2D.IgnoreLayerCollision(StaticProperties.Enemy, StaticProperties.Enemy, true);
 

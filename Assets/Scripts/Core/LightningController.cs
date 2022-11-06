@@ -21,6 +21,8 @@ public class LightningController : MonoBehaviour
             if (quantity <= 0)
             {
                 Debug.Log("Game Over! You lose!");
+
+                GameStateController.Instance.gameState = GameState.LOST;
                 GameStateController.Instance.endGame();
             }
         }

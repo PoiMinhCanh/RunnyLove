@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 9144159037499075}
   - component: {fileID: -3134372866038150830}
   - component: {fileID: 1278394947539407885}
-  - component: {fileID: 2360915052486311381}
   m_Layer: 9
   m_Name: EnemyChameleon
   m_TagString: Enemy
@@ -162,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511ad86b368a2da41bfd2a8f6eb1d5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
 --- !u!114 &9144159037499075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +178,8 @@ MonoBehaviour:
   iFramesDuration: 1
   numberOfFlashes: 3
   HealthBar: {fileID: 3739432554380774833}
+  hurtSound: {fileID: 8300000, guid: 117219fe738379148ac1efb7c7544218, type: 3}
+  deathSound: {fileID: 8300000, guid: cf0ebdac16f4e1846a4b46a643ef9e25, type: 3}
 --- !u!114 &-3134372866038150830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4f4fd6962958647937052382c570c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.7
+  speed: 4
   isFirstMove: 0
 --- !u!114 &1278394947539407885
 MonoBehaviour:
@@ -205,19 +206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d14ae08e40adf47b05ad5602dd45ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2360915052486311381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360257517253146492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 511ad86b368a2da41bfd2a8f6eb1d5da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
 --- !u!1001 &7720149716449289438
 PrefabInstance:
   m_ObjectHideFlags: 0

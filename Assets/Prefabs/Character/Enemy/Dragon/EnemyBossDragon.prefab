@@ -172,6 +172,8 @@ MonoBehaviour:
   iFramesDuration: 2
   numberOfFlashes: 3
   HealthBar: {fileID: 8007294482279670347}
+  hurtSound: {fileID: 8300000, guid: 117219fe738379148ac1efb7c7544218, type: 3}
+  deathSound: {fileID: 8300000, guid: cf0ebdac16f4e1846a4b46a643ef9e25, type: 3}
 --- !u!1001 &4024466214680431396
 PrefabInstance:
   m_ObjectHideFlags: 0

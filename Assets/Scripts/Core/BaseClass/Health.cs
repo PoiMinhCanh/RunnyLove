@@ -26,6 +26,10 @@ public class Health : MonoBehaviour, IHealth
     [SerializeField]
     private HealthBar HealthBar;
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip hurtSound;
+    [SerializeField] private AudioClip deathSound;
+
     private void Awake()
     {
         currentHealth = _startingHealth;
@@ -49,6 +53,8 @@ public class Health : MonoBehaviour, IHealth
         {
             // player hurt
             animator.SetTrigger("hurt");
+            // set sound
+            SoundManager.Instance.PlaySound(hurtSound);
             // iframes
             //StartCoroutine(Invunerability());
         }
@@ -59,7 +65,10 @@ public class Health : MonoBehaviour, IHealth
             {
                 //animator.SetBool("grounded", true);
                 animator.SetTrigger("die");
+                // set sound
+                SoundManager.Instance.PlaySound(deathSound);
 
+                GameStateController.Instance.setQuantity();
                 // Deactivate all attached component classes
                 //foreach (Behaviour component in components)
                 //{

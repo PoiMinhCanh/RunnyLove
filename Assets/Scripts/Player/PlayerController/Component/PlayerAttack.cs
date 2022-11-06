@@ -16,6 +16,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float _timeThrowForce;
     [SerializeField] private int _shotsPerTurn;
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip throwProjectileSound;
+
     private int shotsPerTurnCounter;
 
     #region variables
@@ -66,6 +69,11 @@ public class PlayerAttack : MonoBehaviour
     {
         // set animation throw
         anim.SetTrigger("throw");
+
+        // set sound
+        Debug.Log(SoundManager.Instance);
+        SoundManager.Instance.PlaySound(throwProjectileSound);
+
 
         // pool fireballs
         int index = FindProjectile();

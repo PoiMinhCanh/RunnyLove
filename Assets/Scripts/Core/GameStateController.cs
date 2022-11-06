@@ -21,6 +21,9 @@ public class GameStateController : MonoBehaviour
 
     public GameState gameState;
 
+    [SerializeField] private int quantity;
+    private int _maxQuantity;
+
     private void Awake()
     {
         Instance = this;
@@ -39,23 +42,28 @@ public class GameStateController : MonoBehaviour
 
     private void Start()
     {
-        playerTurn();
+        _maxQuantity = quantity;
+        enemyTurn();
     }
 
     private void Update()
     {
-        if (BossEnemy.GetComponent<Health>().isDead())
+        if (quantity <= 0)
         {
             gameState = GameState.WON;
             Debug.Log(gameState);
-            endGame();
+            nextLevel();
         }
     }
 
     public void endGame()
     {
-        gameState = GameState.LOST;
         SceneManager.LoadScene("EndScene");
+    }
+
+    public void nextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private void playerTurn()
@@ -86,7 +94,7 @@ public class GameStateController : MonoBehaviour
 
         // spawn enemies
 
-        List<GameObject> listSpawn = Spawner.Spawn(Random.Range(1, 5));
+        List<GameObject> listSpawn = Spawner.Spawn(Random.Range(2, 6));
 
         foreach (var spawnObj in listSpawn)
         {
@@ -117,19 +125,19 @@ public class GameStateController : MonoBehaviour
             spawnObj.GetComponent<EnemyMovement>().isFirstMove = false;
         }
 
-        // enemies run
         yield return new WaitForSeconds(0.25f);
-
-        this.gameState = GameState.ENEMYTURN;
-
-        yield return new WaitForSeconds(2f);
-
-        this.gameState = GameState.PLAYERTURN;
 
         // close gate animation
         Spawner.closeGateAnimation();
 
         yield return new WaitForSeconds(1.5f);
+
+        // enemies run
+        this.gameState = GameState.ENEMYTURN;
+
+        yield return new WaitForSeconds(2f);
+
+        this.gameState = GameState.PLAYERTURN;
 
         // set camera back to player
         Vector3 playerPosition = playerTransform.position;
@@ -139,6 +147,21 @@ public class GameStateController : MonoBehaviour
 
         // change to player turn
         playerTurn();
+    }
+    
+    public int getQuantity()
+    {
+        return quantity;
+    }
+
+    public void setQuantity()
+    {
+        quantity--;
+    }
+
+    public int getMaxQuantity()
+    {
+        return _maxQuantity;
     }
 
 }

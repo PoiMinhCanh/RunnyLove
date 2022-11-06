@@ -178,6 +178,8 @@ MonoBehaviour:
   iFramesDuration: 1
   numberOfFlashes: 3
   HealthBar: {fileID: 6835486903951083432}
+  hurtSound: {fileID: 8300000, guid: 117219fe738379148ac1efb7c7544218, type: 3}
+  deathSound: {fileID: 8300000, guid: cf0ebdac16f4e1846a4b46a643ef9e25, type: 3}
 --- !u!114 &439908299911940319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4f4fd6962958647937052382c570c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.2
+  speed: 5.5
   isFirstMove: 0
 --- !u!114 &439908299911940312
 MonoBehaviour:
