@@ -71,7 +71,6 @@ public class PlayerAttack : MonoBehaviour
         anim.SetTrigger("throw");
 
         // set sound
-        Debug.Log(SoundManager.Instance);
         SoundManager.Instance.PlaySound(throwProjectileSound);
 
 

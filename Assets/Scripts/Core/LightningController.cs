@@ -17,7 +17,7 @@ public class LightningController : MonoBehaviour
         {
             collision.GetComponent<EnemyDisappearController>().disappear();
             quantity--;
-            Debug.Log(quantity);
+
             if (quantity <= 0)
             {
                 Debug.Log("Game Over! You lose!");
