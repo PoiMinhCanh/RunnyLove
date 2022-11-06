@@ -11,7 +11,7 @@ public class GoalUIController : MonoBehaviour
 
     [Header("Component")]
     [SerializeField] private Text textQuantity;
-    [SerializeField] private Image image;
+    //[SerializeField] private Image image;
 
     private void Awake()
     {
@@ -33,14 +33,14 @@ public class GoalUIController : MonoBehaviour
     private void Update()
     {
         updateQuantity();
-        updateImage();
+        //updateImage();
     }
 
-    private void updateImage()
-    {
-        //Debug.Log((float)LightningController.getQuantity() / LightningController.getMaxQuantity());
-        image.fillAmount = ((float)GameStateController.getQuantity() / GameStateController.getMaxQuantity());
-    }
+    //private void updateImage()
+    //{
+    //    //Debug.Log((float)LightningController.getQuantity() / LightningController.getMaxQuantity());
+    //    image.fillAmount = ((float)GameStateController.getQuantity() / GameStateController.getMaxQuantity());
+    //}
 
     private void updateQuantity()
     {
